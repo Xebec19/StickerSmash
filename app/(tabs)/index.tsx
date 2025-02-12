@@ -1,9 +1,11 @@
+import { Link } from "expo-router";
 import { Text, View, StyleSheet } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Hello Screen</Text>
+      <Link href="/about">About</Link>
     </View>
   );
 }
