@@ -8,6 +8,7 @@ const PLACE_HOLDER = require("@/assets/images/joseph-gonzalez-iFgRcqHznqg-unspla
 
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -18,9 +19,22 @@ export default function Index() {
 
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
+      setShowAppOptions(true);
     } else {
       alert("You did not select any image.");
     }
+  };
+
+  const onReset = () => {
+    setShowAppOptions(false);
+  };
+
+  const onAddSticker = () => {
+    // todo we would implement this later
+  };
+
+  const onSaveImageAsync = async () => {
+    // todo we would implement this later
   };
 
   return (
@@ -28,14 +42,18 @@ export default function Index() {
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PLACE_HOLDER} selectedImage={selectedImage} />
       </View>
-      <View style={styles.footerContainer}>
-        <Button
-          label="Choose a Photo"
-          theme="primary"
-          onPress={pickImageAsync}
-        />
-        <Button label="Use this photo" />
-      </View>
+      {showAppOptions ? (
+        <View />
+      ) : (
+        <View style={styles.footerContainer}>
+          <Button
+            label="Choose a Photo"
+            theme="primary"
+            onPress={pickImageAsync}
+          />
+          <Button label="Use this photo" />
+        </View>
+      )}
     </View>
   );
 }
