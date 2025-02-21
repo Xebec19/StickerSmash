@@ -6,6 +6,9 @@ import { useState } from "react";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
 import EmojiPicker from "@/components/EmojiPicker";
+import { type ImageSource } from "expo-image";
+import EmojiList from "@/components/EmojiList";
+import EmojiSticker from "@/components/EmojiSticker";
 
 const PLACE_HOLDER = require("@/assets/images/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg");
 
@@ -13,6 +16,7 @@ export default function Index() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [pickedEmoji, setPickedEmoji] = useState<ImageSource | null>(null);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -49,6 +53,9 @@ export default function Index() {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PLACE_HOLDER} selectedImage={selectedImage} />
+        {pickedEmoji && (
+          <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
+        )}
       </View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
@@ -76,7 +83,7 @@ export default function Index() {
         </View>
       )}
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-        {/* todo */}
+        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
       </EmojiPicker>
     </View>
   );
