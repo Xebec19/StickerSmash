@@ -3,7 +3,7 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
 type Props = {
-  onPress: () => {};
+  onPress: () => void;
 };
 
 const CircleButton = ({ onPress }: Props) => {

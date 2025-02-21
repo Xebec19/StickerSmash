@@ -5,7 +5,7 @@ import { FontAwesome } from "@expo/vector-icons";
 type Props = {
   label: string;
   theme?: string;
-  onPress?: () => {};
+  onPress?: () => void;
 };
 
 const Button = ({ label, theme = "", onPress }: Props) => {
