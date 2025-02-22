@@ -10,6 +10,7 @@ import { type ImageSource } from "expo-image";
 import EmojiList from "@/components/EmojiList";
 import EmojiSticker from "@/components/EmojiSticker";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import * as MediaLibrary from "expo-media-library";
 
 const PLACE_HOLDER = require("@/assets/images/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg");
 
@@ -18,6 +19,11 @@ export default function Index() {
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [pickedEmoji, setPickedEmoji] = useState<ImageSource | null>(null);
+  const [status, requestPermissions] = MediaLibrary.usePermissions();
+
+  if (!status) {
+    requestPermissions();
+  }
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
