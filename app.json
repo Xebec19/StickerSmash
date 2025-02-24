@@ -38,6 +38,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "42139bf5-e0ce-4b16-9cd6-ff5766b000fe"
+      }
+    },
+    "owner": "xebec19"
   }
 }
